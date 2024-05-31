@@ -1,50 +1,28 @@
-"use client";
-import { useState, useEffect } from 'react';
+"use client"; 
+import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 
-const LogIn = () => {
+const SignUp = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      router.push('/dashboard'); 
-    }
-  }, [router]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    formData.append('username', email);
-    formData.append('password', password);
-
     try {
-      const response = await axios.post('http://localhost:8000/login', formData, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      });
-
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('token', response.data.access_token);
-        router.push('/dashboard');
-      }
+      const response = await axios.post('http://localhost:8000/signup', { email, password });
+      router.push('/')
     } catch (error) {
       console.error(error);
-      alert('Log in failed!');
+      alert('Sign up failed!');
     }
   };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
       <div className="w-full max-w-md px-8 py-6 mt-4 bg-white shadow-md rounded-lg">
-        <h1 className="text-xl font-semibold text-gray-900 text-center">Job Search App</h1>
-        <p className="text-sm text-gray-600 text-center mb-6">Login to your account</p>
+        <h1 className="text-xl font-semibold text-gray-900 text-center">Sign Up</h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label htmlFor="email" className="text-sm font-medium text-gray-700">Email</label>
@@ -74,18 +52,12 @@ const LogIn = () => {
             type="submit"
             className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-            Log In
+            Sign Up
           </button>
-          <p className="text-sm text-center text-gray-600">
-            Not a member? {' '}
-            <Link className="text-blue-500 hover:text-blue-700" href="/signup">
-             Sign Up
-            </Link>
-          </p>
         </form>
       </div>
     </div>
   );
 };
 
-export default LogIn;
+export default SignUp;

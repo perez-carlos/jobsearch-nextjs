@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Job Search Web Application
 
-## Getting Started
+This project is a simple job search web application built with Next.js, using Tailwind CSS for styling, and a FastAPI backend with MongoDB for the database.
 
-First, run the development server:
+## Pages
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 1. Login Page
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The login page (`pages/index.js`) allows users to log into the application. It has a form for email and password input. Upon submission, the credentials are sent to the backend API for authentication. If successful, the user is redirected to the Dashboard. If a user is already logged in (i.e., a token exists in `localStorage`), they are automatically redirected to the Dashboard.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 2. Sign Up Page
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The sign-up page (`pages/signup.js`) allows new users to create an account. It also has a form for email and password input. Upon submission, the details are sent to the backend API to create a new user. If successful, the user is notified via an alert.
 
-## Learn More
+### 3. Dashboard Page
 
-To learn more about Next.js, take a look at the following resources:
+The dashboard page (`pages/dashboard.js`) is accessible only to authenticated users. It allows users to search for job postings by job title. The search results, including the job name and company name, are displayed in a table. There is also a logout button that logs the user out by removing the token from `localStorage` and redirecting to the login page.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Running the Application
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Prerequisites
 
-## Deploy on Vercel
+- Node.js (v14 or higher)
+- npm or yarn
+- Python (v3.8 or higher)
+- Pipenv (for managing Python dependencies)
+- MongoDB (running locally or in the cloud)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Frontend Setup (Next.js)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. **Install Dependencies:**
+   ```bash
+   npm install
+   # or
+   yarn install
+2. **Run the Development Server:**
+
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    # or
+    pnpm dev
+    # or
+    bun dev
+    ```
+
+
+
